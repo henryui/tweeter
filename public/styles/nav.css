@@ -1,0 +1,47 @@
+#nav-bar {
+  background-color: #00a087;
+  padding-bottom: 0;
+  padding-top: 0;
+  padding-left: 2em;
+  padding-right: 2em;
+  position: fixed;
+  top: 0;
+  height: 80px;
+  box-sizing: content-box;
+  width: 100%;
+  color: #e8fdff
+}
+
+#nav-bar .logo {
+  width: 80px;
+  height: 80px;
+  float: left;
+}
+
+#nav-bar .header {
+  float: left;
+  font-size: 2rem;
+  margin-left: 10px;
+  line-height: 2.5em;
+}
+
+#nav-bar .compose {
+  float: right;
+  height: 55px;
+  font-size: 1.2rem;
+  margin: 9px 80px;
+  background-color: #d9f7f2;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: #00a087;
+}
+
+#nav-bar .compose:hover {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+
+#nav-bar .compose i {
+  margin-right: 0.2rem;
+}

@@ -1,0 +1,59 @@
+section.new-tweet {
+  margin: 2em;
+  margin-bottom: 0.7em;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  /*padding: 0.7em;*/
+  height: auto;
+  max-height: 300px;
+  overflow: hidden;
+
+  -webkit-transition: max-height, 0.1s ease-out;
+  -moz-transition: max-height, 0.1s ease-out;
+  -ms-transition: max-height, 0.1s ease-out;
+  -o-transition: max-height, 0.1s ease-out;
+  transition: max-height, 0.1s ease-out;
+}
+
+section.new-tweet.collapsed {
+  max-height: 0px;
+  padding: 0;
+  border: 0;
+
+  -webkit-transition: max-height, 0.1s ease-out;
+  -moz-transition: max-height, 0.1s ease-out;
+  -ms-transition: max-height, 0.1s ease-out;
+  -o-transition: max-height, 0.1s ease-out;
+  transition: max-height, 0.1s ease-out;
+}
+
+section.new-tweet h2 {
+  margin-top: 0.5em;
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+  border-bottom: 2px solid #111;
+}
+
+section.new-tweet form textarea {
+  display: block;
+  margin-bottom: 0.3em;
+  margin-left: 0.6em;
+  padding: 0.3em;
+  width: 95%;
+}
+
+section.new-tweet form span.counter {
+  float: right;
+  font-size: 0.9em;
+  line-height: 2.5em;
+  margin-right: 1.2em;
+}
+
+section.new-tweet form input {
+  margin-left: 0.6em;
+}
+
+section.new-tweet form span.negativeRed {
+  color: red;
+}
