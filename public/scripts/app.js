@@ -64,15 +64,20 @@ const handleSubmit = function (e) {
   e.preventDefault();
 
   if (parseInt(e.target.innerText, 10) < 0) {
-    alert("Exceeded maximum character count");
+    // alert("Exceeded maximum character count");
+    $(".new-tweet .error-message").text("Exceeded maximum character count").prepend("<hr>");
+    $(".new-tweet .error-message").slideDown();
     return;
   } else if (parseInt(e.target.innerText, 10) === 140) {
-    alert("Attemped to submit an empty form");
+    // alert("Attemped to submit an empty form");
+    $(".new-tweet .error-message").text("Attemped to submit an empty form").prepend("<hr>");
+    $(".new-tweet .error-message").slideDown();
     return;
   }
 
   const query = $(".new-tweet form").serialize();
   $(".new-tweet form textarea").val("");
+  $(".new-tweet .error-message").hide();
 
   $.ajax("/tweets/", {method: "POST", data: query})
   .then(function (data) {
@@ -93,8 +98,14 @@ const loadTweets = function () {
 
 $(document).ready(function () {
   loadTweets();
+  $(".new-tweet .error-message").hide();
   $(".new-tweet form").submit(handleSubmit);
+
+  // Could have also used jquery's slideToggle, but using css is gives more subtle animation
   $("#nav-bar .compose").on("click", function () {
     $(".container .new-tweet").toggleClass("collapsed");
+    $(".new-tweet .error-message").hide();
   });
+
+
 });
