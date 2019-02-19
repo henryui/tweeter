@@ -64,12 +64,10 @@ const handleSubmit = function (e) {
   e.preventDefault();
 
   if (parseInt(e.target.innerText, 10) < 0) {
-    // alert("Exceeded maximum character count");
     $(".new-tweet .error-message").text("Exceeded maximum character count").prepend("<hr>");
     $(".new-tweet .error-message").slideDown();
     return;
   } else if (parseInt(e.target.innerText, 10) === 140) {
-    // alert("Attemped to submit an empty form");
     $(".new-tweet .error-message").text("Attemped to submit an empty form").prepend("<hr>");
     $(".new-tweet .error-message").slideDown();
     return;
@@ -78,6 +76,9 @@ const handleSubmit = function (e) {
   const query = $(".new-tweet form").serialize();
   $(".new-tweet form textarea").val("");
   $(".new-tweet .error-message").hide();
+
+  // Has to reset the character count to 140 again
+  $(".new-tweet form .counter").html("<em>140</em>");
 
   $.ajax("/tweets/", {method: "POST", data: query})
   .then(function (data) {
@@ -105,6 +106,10 @@ $(document).ready(function () {
   $("#nav-bar .compose").on("click", function () {
     $(".container .new-tweet").toggleClass("collapsed");
     $(".new-tweet .error-message").hide();
+
+    // Clear the form
+    $(".new-tweet form .counter").html("<em>140</em>");
+    $(".new-tweet form textarea").val("");
   });
 
 
