@@ -79,6 +79,10 @@ article.tweet{
       margin-left: 0.7em;
       color: white;
     }
+
+    i.fa-heart.liked {
+      color: red;
+    }
   }
 
   div {
@@ -99,5 +103,9 @@ article.tweet:hover {
 
   footer i {
     color: #20ad91;
+  }
+
+  footer i.fa-heart.liked {
+    color: red;
   }
 }

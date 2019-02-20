@@ -38,7 +38,8 @@ const createTweetElement = function (data) {
     // $userMessage.append(document.createTextNode(message[i]));
   }
 
-  // Note below that 'data._id' which is MongoDB ObjectId is used to identify each tweets
+  // Note below that 'data._id' which is MongoDB ObjectId is used to identify each tweets,
+  // and like count is only displayed if it is one or more
   const $tweet = $("<article>").addClass("tweet").append(`
     <header>
       <img src="${data.user.avatars.regular}">
@@ -74,6 +75,7 @@ const handleSubmit = function (e) {
   }
 
   const query = $(".new-tweet form").serialize();
+
   $(".new-tweet form textarea").val("");
   $(".new-tweet .error-message").hide();
 
@@ -98,7 +100,16 @@ const loadTweets = function () {
 };
 
 const handleLike = function (e) {
-  e.target.dataset.id;
+  $(e.target).toggleClass("liked");
+  const tweetID = $(e.target).data().id;
+
+  let liked = false;
+  if ($(e.target).hasClass("liked")) {
+    liked = !liked;
+  }
+
+  $.ajax("/tweets/", {method: "PUT", data: {liked, tweetID}})
+  .then();
 };
 
 $(document).ready(function () {
