@@ -1,17 +1,55 @@
 # Tweeter Project
 
-Tweeter is a simple, single-page Twitter clone.
+Tweeter is a simple, single-page Twitter clone. It is a client-side app, communicating with a server via AJAX, and connected to a persistent data, MongoDB.
 
-This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, JS, jQuery and AJAX front-end skills, and their Node, Express and MongoDB back-end skills.
 
-## Getting Started
+## Final Product
 
-1. Fork this repository, then clone your fork of this repository.
-2. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
-4. Go to <http://localhost:8080/> in your browser.
+!["The landing page"](https://github.com/henryui/tinyApp/blob/master/docs/urls_home.png?raw=true)
+*The landing page*
+
+
+
+!["The register page"](https://github.com/henryui/tinyApp/blob/master/docs/urls_register.png?raw=true)
+*The register page*
+
+
+
+!["User specific home page"](https://github.com/henryui/tinyApp/blob/master/docs/urls_index.png?raw=true)
+*User specific home page*
+
+
+
+!["Short URL show page"](https://github.com/henryui/tinyApp/blob/master/docs/urls_show.png?raw=true)
+*Short URL show page*
+
 
 ## Dependencies
 
 - Express
 - Node 5.10.x or above
+- BodyParser
+- Chance
+- md5
+- mongodb
+
+
+## Getting Started
+
+- Install all dependencies (using `npm install` command).
+- Run the mongo local server using `mongod` or `sudo mongod`
+- Run the development web server using the `node server/index.js` command.
+- Go to `http://localhost:8080/`
+
+
+## Features
+
+
+
+
+
+
+
+
+
+#### By Yunsung Oh - Lighthouse Labs

@@ -48,6 +48,9 @@ const tweets = [
   }
 ];
 
+// This is a function to initialize the base data above to the mongoDB
+// by dropping the tweets collection, create it again and looping insert the data
+
 const seedDB = function () {
   MongoClient.connect(MONGODB_URI, (err, db) => {
     if (err) {
@@ -57,6 +60,9 @@ const seedDB = function () {
     var dbo = db.db("tweeter");
 
     dbo.collection("tweets").drop(function (err, res) {
+      if (err) {
+        console.log("seed.js: No tweets collection to begin with");
+      }
 
       dbo.createCollection("tweets", function (err, res) {
         if (err) throw err;

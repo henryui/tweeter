@@ -15,7 +15,7 @@ app.use(express.static("public"));
 
 // Use 'seedDB()' below for reset/initialization of the data
 // If not needed, comment the 'seedDB()' below
-// seedDB();
+seedDB();
 
 // The in-memory database of tweets. It's a basic object with an array in it.
 // const db = require("./lib/in-memory-db");

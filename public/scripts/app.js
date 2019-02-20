@@ -34,8 +34,8 @@ const createTweetElement = function (data) {
   const message = data.content.text.split("\n");
   const $userMessage = $("<div>").addClass("user-message").append(document.createTextNode(message[0]));
   for (let i = 1; i < message.length; i++) {
-    $userMessage.append("<br>");
-    $userMessage.append(document.createTextNode(message[i]));
+    $userMessage.append("<br>", document.createTextNode(message[i]));
+    // $userMessage.append(document.createTextNode(message[i]));
   }
 
   const $tweet = $("<article>").addClass("tweet").append(`
@@ -44,9 +44,7 @@ const createTweetElement = function (data) {
       <span><strong>${data.user.name}</strong></span>
       <span class="handler">${data.user.handle}</span>
     </header>
-  `);
-
-  $tweet.append($userMessage).append(`
+  `, $userMessage, `
     <footer>
       <span>${dateMessage}</span>
       <span class="utils">

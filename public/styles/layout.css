@@ -92,6 +92,7 @@ article.tweet .user-message {
   word-wrap: break-word;
 }
 
+/*css for icons*/
 article.tweet footer i {
   margin-left: 0.7em;
   color: white;

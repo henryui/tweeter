@@ -9,7 +9,8 @@
   height: 80px;
   box-sizing: content-box;
   width: 100%;
-  color: #e8fdff
+  color: #e8fdff;
+  z-index: 2;
 }
 
 #nav-bar .logo {
