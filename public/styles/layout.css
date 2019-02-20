@@ -75,6 +75,12 @@ article.tweet footer i {
 article.tweet footer i.fa-heart.liked {
   color: red;
 }
+article.tweet footer .like-count {
+  color: white;
+}
+article.tweet footer i.fa-heart.liked + .like-count {
+  color: black;
+}
 article.tweet div {
   padding: 2em 1em;
 }
@@ -90,6 +96,9 @@ article.tweet:hover header {
 }
 article.tweet:hover footer i {
   color: #20ad91;
+}
+article.tweet:hover footer .like-count {
+  color: black;
 }
 article.tweet:hover footer i.fa-heart.liked {
   color: red;

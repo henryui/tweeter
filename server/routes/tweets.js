@@ -42,8 +42,8 @@ module.exports = function (DataHelpers) {
     });
   });
 
-  tweetsRoutes.put("/", function (req, res) {
-    DataHelpers.likeTweet(req.body.tweetID, req.body.liked, (err) => {
+  tweetsRoutes.put("/:id", function (req, res) {
+    DataHelpers.likeTweet(req.params.id, req.body.liked, (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {

@@ -83,6 +83,14 @@ article.tweet{
     i.fa-heart.liked {
       color: red;
     }
+
+    .like-count {
+      color: white;
+    }
+
+    i.fa-heart.liked + .like-count {
+      color: black;
+    }
   }
 
   div {
@@ -103,6 +111,10 @@ article.tweet:hover {
 
   footer i {
     color: #20ad91;
+  }
+
+  footer .like-count {
+    color: black;
   }
 
   footer i.fa-heart.liked {

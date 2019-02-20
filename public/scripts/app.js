@@ -108,8 +108,10 @@ const handleLike = function (e) {
     liked = !liked;
   }
 
-  $.ajax("/tweets/", {method: "PUT", data: {liked, tweetID}})
-  .then();
+  $.ajax(`/tweets/${tweetID}`, {method: "PUT", data: {liked}})
+  .then(function (data) {
+    // $.ajax()
+  });
 };
 
 $(document).ready(function () {
