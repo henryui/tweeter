@@ -38,6 +38,7 @@ const createTweetElement = function (data) {
     // $userMessage.append(document.createTextNode(message[i]));
   }
 
+  // Note below that 'data._id' which is MongoDB ObjectId is used to identify each tweets
   const $tweet = $("<article>").addClass("tweet").append(`
     <header>
       <img src="${data.user.avatars.regular}">
@@ -50,7 +51,8 @@ const createTweetElement = function (data) {
       <span class="utils">
         <i class="fas fa-flag"></i>
         <i class="fas fa-retweet"></i>
-        <i class="fas fa-heart"></i>
+        <i class="fas fa-heart" data-id=${data._id}></i>
+        <span class="like-count">${(data.like ? data.like.toString() : "")}</span>
       </span>
     </footer>
   `);
@@ -95,15 +97,22 @@ const loadTweets = function () {
   });
 };
 
+const handleLike = function (e) {
+  e.target.dataset.id;
+};
+
 $(document).ready(function () {
   loadTweets();
   $(".new-tweet .error-message").hide();
   $(".new-tweet form").submit(handleSubmit);
 
+  $("#tweets-container").on("click", ".fa-heart", handleLike);
+
   // Could have also used jquery's slideToggle, but using css is gives more subtle animation
   $("#nav-bar .compose").on("click", function () {
     $(".container .new-tweet").toggleClass("collapsed");
     $(".new-tweet .error-message").hide();
+    $("#textinput").focus();
 
     // Clear the form
     $(".new-tweet form .counter").html("<em>140</em>");
