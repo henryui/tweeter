@@ -110,7 +110,8 @@ const handleLike = function (e) {
 
   $.ajax(`/tweets/${tweetID}`, {method: "PUT", data: {liked}})
   .then(function (data) {
-    // $.ajax()
+    const count = (data) ? data.toString() : "";
+    $(e.target).siblings(".like-count").text(count);
   });
 };
 

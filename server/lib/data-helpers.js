@@ -30,9 +30,9 @@ module.exports = function makeDataHelpers (db) {
           if (err) {
             throw err;
           }
+          callback(null, newValue);
         });
       });
-      callback(null, true);
     },
 
     // Get all tweets in `db`, sorted by newest first
