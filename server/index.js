@@ -6,8 +6,9 @@ const PORT          = 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
+require('dotenv').config();
 const {MongoClient} = require("mongodb");
-const MONGODB_URI   = "mongodb://localhost:27017/";
+const MONGODB_URI   = process.env.MONGODB_URI;
 const seedDB        = require("../public/scripts/seed");
 
 app.use(bodyParser.urlencoded({ extended: true }));
