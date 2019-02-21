@@ -2,7 +2,7 @@
 
 // Basic express setup:
 
-const PORT          = 8080;
+const PORT          = process.env.PORT || 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
@@ -22,9 +22,9 @@ app.use(cookieSession({
   keys: [process.env.COOKIE_KEY1, process.env.COOKIE_KEY2] // Change the keys value into some strings for testing
 }));
 
-// Use 'seedDB()' below for reset/initialization of the data
-// If not needed, comment the 'seedDB()' below
-seedDB();
+// **Use 'seedDB()' below for reset/initialization of the data
+// If not needed, comment the 'seedDB()' below**
+// seedDB();
 
 // The in-memory database of tweets. It's a basic object with an array in it.
 // const db = require("./lib/in-memory-db");
