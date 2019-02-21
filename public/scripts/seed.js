@@ -1,8 +1,5 @@
 const {MongoClient} = require("mongodb");
-<<<<<<< HEAD
-require('dotenv').config();
-const MONGODB_URI = process.env.MONGODB_URI;
-=======
+
 bcrypt = require('bcrypt');
 require('dotenv').config();
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -13,7 +10,6 @@ const userAdmin =  {
   name: "Yunsung Oh",
   password: bcrypt.hashSync("admin", 10)
 };
->>>>>>> feature/user
 
 const tweets = [
   {
