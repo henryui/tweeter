@@ -123,7 +123,7 @@ $(document).ready(function () {
   $("#tweets-container").on("click", ".fa-heart", handleLike);
 
   // Could have also used jquery's slideToggle, but using css is gives more subtle animation
-  $("#nav-bar .compose").on("click", function () {
+  $("#nav-bar").on("click", ".compose", function () {
     $(".container .new-tweet").toggleClass("collapsed");
     $(".new-tweet .error-message").hide();
     $("#textinput").focus();
@@ -133,5 +133,15 @@ $(document).ready(function () {
     $(".new-tweet form textarea").val("");
   });
 
+  // Second handler for the log-in form
+  $("#nav-bar").on("click", ".login", function () {
+    $(".container .login-form").toggleClass("collapsed");
+    $(".login-form .error-message").hide();
+
+    // Clear the form
+    $(".login-form .username").val("");
+    $(".login-form form .userid").val("");
+    $(".login-form form .password").val("");
+  });
 
 });

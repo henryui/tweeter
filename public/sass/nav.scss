@@ -1,3 +1,18 @@
+%button-prop {
+  background-color: #d9f7f2;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: #00a087;
+  height: 55px;
+  font-size: 1.2rem;
+  margin: 0.5em 0.5em;
+}
+
+%button-hover {
+  background-color: white;
+  color: black;
+}
+
 #nav-bar {
   background-color: #00a087;
   padding-bottom: 0;
@@ -12,7 +27,7 @@
   color: #e8fdff;
   z-index: 2;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
 
   .logo {
     width: 80px;
@@ -28,15 +43,8 @@
   }
 
   .compose {
-    float: right;
-    height: 55px;
-    font-size: 1.2rem;
-    margin: 0.5em 4em;
+    @extend %button-prop;
     margin-left: auto;
-    background-color: #d9f7f2;
-    border: 1px solid black;
-    border-radius: 5px;
-    color: #00a087;
 
     i {
       margin-right: 0.2rem;
@@ -44,8 +52,16 @@
   }
 
   .compose:hover {
-    background-color: white;
-    border: 1px solid black;
-    color: black;
+    @extend %button-hover;
+  }
+
+  .login {
+    @extend %button-prop;
+    margin-left: auto;
+    margin-right: 4em;
+  }
+
+  .login:hover {
+    @extend %button-hover;
   }
 }

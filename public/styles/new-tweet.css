@@ -1,4 +1,4 @@
-section.new-tweet.collapsed, section.new-tweet {
+section.new-tweet.collapsed, section.login-form.collapsed, section.new-tweet, section.login-form {
   -webkit-transition: max-height, 0.1s ease-out;
   -moz-transition: max-height, 0.1s ease-out;
   -ms-transition: max-height, 0.1s ease-out;
@@ -6,7 +6,7 @@ section.new-tweet.collapsed, section.new-tweet {
   transition: max-height, 0.1s ease-out;
 }
 
-section.new-tweet {
+section.new-tweet, section.login-form {
   margin: 2em;
   margin-bottom: 0.7em;
   margin-top: 0.6em;
@@ -18,37 +18,57 @@ section.new-tweet {
   max-height: 300px;
   overflow: hidden;
 }
-section.new-tweet h2 {
+section.new-tweet h2, section.login-form h2 {
   margin-top: 0.5em;
   margin-left: 0.4em;
   margin-right: 0.4em;
   border-bottom: 2px solid #111;
 }
-section.new-tweet form textarea {
+section.new-tweet form.tweet-form textarea, section.login-form form.tweet-form textarea {
   display: block;
   margin-bottom: 0.3em;
   margin-left: 0.6em;
   padding: 0.3em;
   width: 95%;
 }
-section.new-tweet form span.counter {
+section.new-tweet form.tweet-form span.counter, section.login-form form.tweet-form span.counter {
   float: right;
   font-size: 0.9em;
   line-height: 2.5em;
   margin-right: 1.2em;
 }
-section.new-tweet form input {
+section.new-tweet form.tweet-form input, section.login-form form.tweet-form input {
   margin-left: 0.6em;
 }
-section.new-tweet form span.negativeRed {
+section.new-tweet form.tweet-form span.negativeRed, section.login-form form.tweet-form span.negativeRed {
   color: red;
 }
-section.new-tweet .error-message {
+section.new-tweet form.log-form, section.login-form form.log-form {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+section.new-tweet form.log-form label, section.login-form form.log-form label {
+  width: 20%;
+  text-align: right;
+  margin-bottom: 0.4em;
+}
+section.new-tweet form.log-form input, section.login-form form.log-form input {
+  width: 70%;
+  height: 2em;
+  margin-right: 0.7em;
+  margin-bottom: 0.4em;
+}
+section.new-tweet form.log-form input[type=submit], section.login-form form.log-form input[type=submit] {
+  width: 30%;
+}
+section.new-tweet .error-message, section.login-form .error-message {
   margin: 0.6em 0.6em;
   color: red;
 }
 
-section.new-tweet.collapsed {
+section.new-tweet.collapsed, section.login-form.collapsed {
   max-height: 0px;
   border: 0;
 }

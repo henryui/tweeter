@@ -6,7 +6,7 @@
   transition: max-height, 0.1s ease-out;
 }
 
-section.new-tweet {
+section.new-tweet, section.login-form {
   margin: 2em;
   margin-bottom: 0.7em;
   margin-top: 0.6em;
@@ -27,7 +27,7 @@ section.new-tweet {
     border-bottom: 2px solid #111;
   }
 
-  form {
+  form.tweet-form {
     textarea {
       display: block;
       margin-bottom: 0.3em;
@@ -52,13 +52,37 @@ section.new-tweet {
     }
   }
 
+  form.log-form {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+
+    label {
+      width: 20%;
+      text-align: right;
+      margin-bottom: 0.4em;
+    }
+
+    input {
+      width: 70%;
+      height: 2em;
+      margin-right: 0.7em;
+      margin-bottom: 0.4em;
+    }
+
+    input[type="submit"] {
+      width: 30%;
+    }
+  }
+
   .error-message {
     margin: 0.6em 0.6em;
     color: red;
   }
 }
 
-section.new-tweet.collapsed {
+section.new-tweet.collapsed, section.login-form.collapsed {
   max-height: 0px;
   border: 0;
 
