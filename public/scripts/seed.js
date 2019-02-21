@@ -1,6 +1,19 @@
 const {MongoClient} = require("mongodb");
+<<<<<<< HEAD
 require('dotenv').config();
 const MONGODB_URI = process.env.MONGODB_URI;
+=======
+bcrypt = require('bcrypt');
+require('dotenv').config();
+const MONGODB_URI = process.env.MONGODB_URI;
+
+// This account is only for testing purpose
+const userAdmin =  {
+  handle: "admin",
+  name: "Yunsung Oh",
+  password: bcrypt.hashSync("admin", 10)
+};
+>>>>>>> feature/user
 
 const tweets = [
   {
@@ -75,12 +88,26 @@ const seedDB = function () {
         for (let i = 0; i < tweets.length; i++) {
           dbo.collection("tweets").insertOne(tweets[i], function (err, res) {
             if (err) throw err;
+            counter++;
+            // If all of the tweets are added, add admin user
+            if (counter === tweets.length) {
+              dbo.collection("users").drop(function (err, res) {
+                if (err) {
+                  console.log("seed.js: No users collection to begin with");
+                }
+
+                dbo.createCollection("users", function (err, res) {
+                  if (err) throw err;
+
+                  dbo.collection("users").insertOne(userAdmin, function (err, res) {
+                    if (err) throw err;
+                    console.log("Seeding data has completed");
+                    db.close();
+                  });
+                });
+              });
+            }
           });
-          counter++;
-          if (counter === tweets.length) {
-            console.log("Seeding data has completed");
-            db.close();
-          }
         }
       });
     });

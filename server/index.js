@@ -6,13 +6,21 @@ const PORT          = 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
+
 require('dotenv').config();
+
 const {MongoClient} = require("mongodb");
 const MONGODB_URI   = process.env.MONGODB_URI;
+const cookieSession = require('cookie-session');
+const bcrypt        = require('bcrypt');
 const seedDB        = require("../public/scripts/seed");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(cookieSession({
+  name: 'session',
+  keys: [process.env.COOKIE_KEY1, process.env.COOKIE_KEY2] // Change the keys value into some strings for testing
+}));
 
 // Use 'seedDB()' below for reset/initialization of the data
 // If not needed, comment the 'seedDB()' below
