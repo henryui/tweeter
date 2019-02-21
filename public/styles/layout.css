@@ -25,7 +25,8 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 main.container {
-  width: 450px;
+  font-size: 2vw;
+  width: 60vw;
   margin: auto;
   background-color: white;
   margin-top: 80px;
@@ -102,6 +103,13 @@ article.tweet:hover footer .like-count {
 }
 article.tweet:hover footer i.fa-heart.liked {
   color: red;
+}
+
+@media only screen and (max-width: 767px) {
+  main.container {
+    font-size: 3vw;
+    width: 90vw;
+  }
 }
 
 /*# sourceMappingURL=layout.css.map */

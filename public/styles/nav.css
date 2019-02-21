@@ -11,6 +11,8 @@
   width: 100%;
   color: #e8fdff;
   z-index: 2;
+  display: flex;
+  flex-flow: row wrap;
 }
 #nav-bar .logo {
   width: 80px;
@@ -20,14 +22,15 @@
 #nav-bar .header {
   float: left;
   font-size: 2rem;
-  margin-left: 10px;
+  margin-left: 0.4em;
   line-height: 2.5em;
 }
 #nav-bar .compose {
   float: right;
   height: 55px;
   font-size: 1.2rem;
-  margin: 9px 80px;
+  margin: 0.5em 4em;
+  margin-left: auto;
   background-color: #d9f7f2;
   border: 1px solid black;
   border-radius: 5px;
