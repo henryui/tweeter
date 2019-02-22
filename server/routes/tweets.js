@@ -21,7 +21,7 @@ module.exports = function (DataHelpers) {
     if (!req.body.text) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
-    } else if (!req.session) {
+    } else if (!req.session.uid) {
       res.status(403).json({ error: 'invalid request: not authorized user'});
       return;
     }
@@ -54,9 +54,9 @@ module.exports = function (DataHelpers) {
   });
 
   tweetsRoutes.put("/:id", function (req, res) {
-    if (!req.session) {
+    if (!req.session.uid) {
       //** remove 2nd arg if not needed
-      res.json(["false", "false", 0]);
+      return res.json(["false", 0]);
     }
 
     DataHelpers.likeTweet(req.params.id, req.session.uid, (err, likeStatus) => {

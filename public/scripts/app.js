@@ -63,6 +63,7 @@ const renderTweets = function (tweets) {
   // loops through tweets
     // calls createTweetElement for each tweet
     // takes return value and appends it to the tweets container
+  $('#tweets-container').empty();
   for (var i = tweets.length - 1; i >= 0; i--) {
     $('#tweets-container').append(createTweetElement(tweets[i]));
   }
@@ -175,6 +176,9 @@ const handleLogin = function (e) {
       $(".container .login-form").remove();
       $(".container .regis-form").remove();
       $(".container").prepend(composeForm);
+
+      // Minor reload to set up like color for the logged in user
+      loadTweets();
     }
   });
 };
@@ -208,7 +212,7 @@ const handleLike = function (e) {
   $.ajax(`/tweets/${tweetID}`, {method: "PUT"})
   .then(function (data) {
     if (data[0] === "true") {
-      const count = (data[2]) ? data[2].toString() : "";
+      const count = (data[1]) ? data[1].toString() : "";
       $(e.target).siblings(".like-count").text(count);
 
       $(e.target).toggleClass("liked");
@@ -250,7 +254,7 @@ $(document).ready(function () {
     $(".new-tweet form textarea").val("");
   });
 
-  // Handler for the log-in
+  // Handler for the log-in button
   $("#nav-bar").on("click", ".login", function () {
     $(".container .login-form").toggleClass("collapsed");
     $(".login-form .error-message").hide();
@@ -262,7 +266,7 @@ $(document).ready(function () {
     $(".login-form form .password").val("");
   });
 
-  // Handler for the register
+  // Handler for the register button
   $("#nav-bar").on("click", ".register", function () {
     $(".container .regis-form").toggleClass("collapsed");
     $(".regis-form .error-message").hide();
@@ -275,7 +279,7 @@ $(document).ready(function () {
     $(".regis-form form .password").val("");
   });
 
-  // Handler for the logout
+  // Handler for the logout button
   $("#nav-bar").on("click", ".logout", function () {
     $.ajax("/users/logout", {method: "POST"})
     .then(function (data) {

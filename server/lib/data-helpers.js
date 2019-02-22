@@ -26,22 +26,20 @@ module.exports = function makeDataHelpers (db) {
           throw err;
         }
         if (result.user.handle.slice(1) === liker) {
-          callback(null, ["false", "false", 0]);
+          callback(null, ["false", 0]);
         } else {
           const newLike = result.like;
-          let didLike = "false";
           if (liker in newLike) {
             delete newLike[liker];
           } else {
             newLike[liker] = 1;
-            didLike = "true";
           }
 
           db.collection("tweets").updateOne({"_id": ObjectID(tweetID)}, {$set: {"like": newLike}}, function (err, res) {
             if (err) {
               throw err;
             }
-            callback(null, ["true", didLike, Object.keys(newLike).length]);
+            callback(null, ["true", Object.keys(newLike).length]);
           });
         }
       });
