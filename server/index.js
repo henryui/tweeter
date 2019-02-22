@@ -25,7 +25,7 @@ app.use(cookieSession({
 // *#* Use 'seedDB()' below for reset/initialization of the data
 // If not needed, comment the 'seedDB()' below *#*
 
-// seedDB();
+seedDB();
 
 
 MongoClient.connect(MONGODB_URI, (err, db) => {
