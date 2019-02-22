@@ -91,7 +91,6 @@ const createTweetElement = function (data) {
   const $userMessage = $("<div>").addClass("user-message").append(document.createTextNode(message[0]));
   for (let i = 1; i < message.length; i++) {
     $userMessage.append("<br>", document.createTextNode(message[i]));
-    // $userMessage.append(document.createTextNode(message[i]));
   }
 
   // Note below that 'data._id' which is MongoDB ObjectId is used to identify each tweets,
@@ -294,5 +293,4 @@ $(document).ready(function () {
       $("i").removeClass("liked");
     });
   });
-
 });

@@ -3,9 +3,9 @@
   border: 1px solid black;
   border-radius: 5px;
   color: #00a087;
-  height: 55px;
-  font-size: 1.2rem;
-  margin: 0.5em 0.5em;
+  height: 5.5vw;
+  font-size: 3vw;
+  margin: 0em 0.4em;
 }
 
 #nav-bar .compose:hover, #nav-bar .login:hover, #nav-bar .logout:hover, #nav-bar .register:hover {
@@ -21,21 +21,22 @@
   padding-right: 2em;
   position: fixed;
   top: 0;
-  height: 80px;
+  height: 9vw;
   box-sizing: content-box;
   width: 100%;
   color: #e8fdff;
   z-index: 2;
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
 }
 #nav-bar .logo {
-  width: 80px;
-  height: 80px;
+  width: 9vw;
+  height: 9vw;
   float: left;
 }
 #nav-bar .header {
-  font-size: 2rem;
+  font-size: 3.3vw;
   margin-left: 0.4em;
   line-height: 2.5em;
 }
@@ -49,10 +50,10 @@
   margin-left: auto;
 }
 #nav-bar .header-name {
-  font-size: 1.5rem;
+  font-size: 2.5vw;
   margin-left: 0.4em;
   line-height: 3em;
-  margin-right: 2.5em;
+  margin-right: 3.5em;
 }
 #nav-bar .register {
   margin-right: 4em;

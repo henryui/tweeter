@@ -1,8 +1,4 @@
 $(document).ready(function () {
-  // --- our code goes here ---
-  // $(this).siblings('.counter').text()
-  // const textArea = document.querySelector('.new-tweet form textarea');
-
   $('.container').on('keyup', '#textinput', function (e) {
     const counter = Math.min(140, 140 - $('#textinput').val().length).toString();
 

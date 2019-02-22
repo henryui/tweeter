@@ -12,7 +12,6 @@ require('dotenv').config();
 const {MongoClient} = require("mongodb");
 const MONGODB_URI   = process.env.MONGODB_URI;
 const cookieSession = require('cookie-session');
-// const bcrypt        = require('bcrypt');
 const seedDB        = require("./lib/seed");
 
 app.use(bodyParser.urlencoded({ extended: true }));

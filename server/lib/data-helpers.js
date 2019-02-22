@@ -57,7 +57,7 @@ module.exports = function makeDataHelpers (db) {
       });
     },
 
-    // Get all tweets in `db`, sorted by newest first
+    // Logs user in or gives error is unmatched
     loginTweet (userid, password, callback) {
       db.collection("users").findOne({handle: userid}, function (err, result) {
         if (err) {
@@ -74,6 +74,7 @@ module.exports = function makeDataHelpers (db) {
       });
     },
 
+    // Registers user or gives error if username is taken
     registerTweet (username, userid, password, avatar, callback) {
       if (!username.replace(/\s/g, '').length || !userid.replace(/\s/g, '').length || !password.replace(/\s/g, '').length) {
         return callback(null, ["false", "Invalid Name/ID/Password"]);
@@ -100,6 +101,7 @@ module.exports = function makeDataHelpers (db) {
       });
     },
 
+    // Finds the user for page reloads
     findUser (userid, callback) {
       db.collection("users").findOne({handle: userid}, function (err, result) {
         if (err) {

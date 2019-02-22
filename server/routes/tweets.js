@@ -27,7 +27,6 @@ module.exports = function (DataHelpers) {
     }
 
     DataHelpers.findUser(req.session.uid, function (err, userinfo) {
-      // const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
       const tweet = {
         user: {
           name: userinfo.name,
@@ -55,7 +54,6 @@ module.exports = function (DataHelpers) {
 
   tweetsRoutes.put("/:id", function (req, res) {
     if (!req.session.uid) {
-      //** remove 2nd arg if not needed
       return res.json(["false", 0]);
     }
 
