@@ -72,14 +72,17 @@ const renderTweets = function (tweets) {
 const createTweetElement = function (data) {
   var date = (Date.now() - data.created_at) / 86400000;
   var dateMessage;
-  if (date >= 1) {
-    dateMessage = `${Math.floor(date)} Days Ago`;
+  //
+  if (date > 7) {
+    dateMessage = new Date(data.created_at - new Date(data.created_at).getTimezoneOffset() * 60 * 1000).toDateString();
+  } else if (date >= 1) {
+    dateMessage = `${Math.floor(date)} Day(s) Ago`;
   } else if ((date * 24) >= 1) {
-    dateMessage = `${Math.floor(date * 24)} Hours Ago`;
-  } else if ((date * 1440) >= 1) {
-    dateMessage = `${Math.floor(date * 1440)} Minutes Ago`;
+    dateMessage = `${Math.floor(date * 24)} Hour(s) Ago`;
+  }  else if ((date * 1440) >= 1) {
+    dateMessage = `${Math.floor(date * 1440)} Minute(s) Ago`;
   } else {
-    dateMessage = `${Math.floor(date * 86400)} Seconds Ago`;
+    dateMessage = `${Math.floor(date * 86400)} Second(s) Ago`;
   }
 
 
