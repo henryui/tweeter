@@ -33,10 +33,10 @@ const loginRegisForm = `
     <h2>Register to Tweeter</h2>
     <form class="reg-form">
       <label for="username">Name:</label>
-      <input class="username" type="text" name="username" placeholder="Your Name" required>
+      <input class="username" type="text" name="username" placeholder="Your Name" maxlength="30" required>
 
       <label for="userid">User ID:</label>
-      <input class="userid" type="text" name="userid" placeholder="ID for handle" required>
+      <input class="userid" type="text" name="userid" placeholder="ID for handle" maxlength="20" required>
 
       <label for="password">Password:</label>
       <input class="password" type="password" name="password" required>
