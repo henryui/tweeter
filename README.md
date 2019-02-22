@@ -36,9 +36,22 @@ Tweeter is a simple, single-page Twitter clone. It is a client-side app, communi
 
 ## Getting Started
 
-- Install all dependencies (using `npm install` command).
-- Run the mongo local server using `mongod` or `sudo mongod`
-- Run the development web server using the `node server/index.js` command.
+1. Install all dependencies (using `npm install` command).
+
+2. Install MongoDB driver suited to your OS.
+
+3. Run the mongo local server using `mongod` or `sudo mongod`
+
+4. Create `.env` file with variables:
+```
+MONGODB_URI=mongodb://localhost:27017/
+COOKIE_KEY1=someCookie1
+COOKIE_KEY2=someCookie2
+PORT=8080
+```
+
+
+4. Run the development web server using the `node server/index.js` command.
 - Go to `http://localhost:8080/`
 
 
