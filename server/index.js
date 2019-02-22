@@ -12,8 +12,8 @@ require('dotenv').config();
 const {MongoClient} = require("mongodb");
 const MONGODB_URI   = process.env.MONGODB_URI;
 const cookieSession = require('cookie-session');
-const bcrypt        = require('bcrypt');
-const seedDB        = require("../public/scripts/seed");
+// const bcrypt        = require('bcrypt');
+const seedDB        = require("./lib/seed");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -26,8 +26,6 @@ app.use(cookieSession({
 // If not needed, comment the 'seedDB()' below**
 // seedDB();
 
-// The in-memory database of tweets. It's a basic object with an array in it.
-// const db = require("./lib/in-memory-db");
 
 MongoClient.connect(MONGODB_URI, (err, db) => {
   if (err) {
@@ -51,8 +49,12 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   // so it can define routes that use it to interact with the data layer.
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
 
+  // The `users-routes` module also uses DataHelpers to log in/logout/register users
+  const usersRoutes = require("./routes/userAuth")(DataHelpers);
+
   // Mount the tweets routes at the "/tweets" path prefix:
   app.use("/tweets", tweetsRoutes);
+  app.use("/users", usersRoutes);
 
   app.listen(PORT, () => {
     console.log("Example app listening on port " + PORT);

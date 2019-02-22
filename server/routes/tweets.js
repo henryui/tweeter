@@ -21,24 +21,35 @@ module.exports = function (DataHelpers) {
     if (!req.body.text) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
+    } else if (!req.session) {
+      res.status(403).json({ error: 'invalid request: not authorized user'});
+      return;
     }
 
-    const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
-    const tweet = {
-      user,
-      content: {
-        text: req.body.text
-      },
-      created_at: Date.now(),
-      like: 0
-    };
+    DataHelpers.findUser(req.session.uid, function (err, userinfo) {
+      // const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
+      const tweet = {
+        user: {
+          name: userinfo.name,
+          avatars: {
+            regular: userinfo.avatar,
+          },
+          handle: `@${userinfo.handle}`
+        },
+        content: {
+          text: req.body.text
+        },
+        created_at: Date.now(),
+        like: {}
+      };
 
-    DataHelpers.saveTweet(tweet, (err) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(201).send();
-      }
+      DataHelpers.saveTweet(tweet, (err) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+        } else {
+          res.status(201).send();
+        }
+      });
     });
   });
 

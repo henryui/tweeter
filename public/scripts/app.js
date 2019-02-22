@@ -4,6 +4,61 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+const composeLogout = `
+  <button class="compose"><i class="fas fa-edit"></i>Compose</button>
+  <button class="logout">Log Out</button>
+`;
+
+const loginRegister = `
+  <button class="login">Log In</button>
+  <button class="register">Register</button>
+`;
+
+const loginRegisForm = `
+  <section class="login-form collapsed">
+    <h2>Log in to Tweeter</h2>
+    <form class="log-form">
+      <label for="userid">User ID:</label>
+      <input class="userid" type="text" name="userid" placeholder="Your ID" required>
+
+      <label for="password">Password:</label>
+      <input class="password" type="password" name="password" required>
+
+      <input type="submit" name="signin" value="Log in">
+    </form>
+    <div class="error-message"></div>
+  </section>
+
+  <section class="regis-form collapsed">
+    <h2>Register to Tweeter</h2>
+    <form class="reg-form">
+      <label for="username">Name:</label>
+      <input class="username" type="text" name="username" placeholder="Your Name" required>
+
+      <label for="userid">User ID:</label>
+      <input class="userid" type="text" name="userid" placeholder="ID for handle" required>
+
+      <label for="password">Password:</label>
+      <input class="password" type="password" name="password" required>
+
+      <input type="submit" name="signup" value="Register">
+    </form>
+    <div class="error-message"></div>
+  </section>
+`;
+
+const composeForm = `
+<section class="new-tweet collapsed">
+  <h2>Compose Tweet</h2>
+  <form class="tweet-form">
+    <textarea name="text" placeholder="What are you humming about?" id="textinput"></textarea>
+    <input type="submit" value="Tweet">
+    <span class="counter"><em>140</em></span>
+  </form>
+  <div class="error-message"></div>
+</section>
+`;
+
 const renderTweets = function (tweets) {
   // loops through tweets
     // calls createTweetElement for each tweet
@@ -64,11 +119,11 @@ const createTweetElement = function (data) {
 const handleSubmit = function (e) {
   e.preventDefault();
 
-  if (parseInt(e.target.innerText, 10) < 0) {
+  if ($("#textinput").val().length > 140) {
     $(".new-tweet .error-message").text("Exceeded maximum character count").prepend("<hr>");
     $(".new-tweet .error-message").slideDown();
     return;
-  } else if (parseInt(e.target.innerText, 10) === 140) {
+  } else if (!$("#textinput").val().replace(/\s/g, '').length) {
     $(".new-tweet .error-message").text("Attemped to submit an empty form").prepend("<hr>");
     $(".new-tweet .error-message").slideDown();
     return;
@@ -99,6 +154,52 @@ const loadTweets = function () {
   });
 };
 
+const handleLogin = function (e) {
+  e.preventDefault();
+
+  const query = $(".log-form").serialize();
+
+  $.ajax("/users/login", {method: "POST", data: query})
+  .then(function (data) {
+    if (data[0] === "false") {
+      $(".login-form .error-message").text("Incorrect ID/Password").prepend("<hr>");
+      $(".login-form .error-message").slideDown();
+    } else {
+      $("#nav-bar .login").remove();
+      $("#nav-bar .register").remove();
+      const $uname = $("<span>").addClass("header-name").append(document.createTextNode(`@${data[1]}`));
+      $("#nav-bar").append(composeLogout, $uname);
+
+      $(".container .login-form").remove();
+      $(".container .regis-form").remove();
+      $(".container").prepend(composeForm);
+    }
+  });
+};
+
+const handleRegister = function (e) {
+  e.preventDefault();
+
+  const query = $(".reg-form").serialize();
+
+  $.ajax("/users/register", {method: "POST", data: query})
+  .then(function (data) {
+    if (data[0] === "false") {
+      $(".regis-form .error-message").text(data[1]).prepend("<hr>");
+      $(".regis-form .error-message").slideDown();
+    } else {
+      $("#nav-bar .login").remove();
+      $("#nav-bar .register").remove();
+      const $uname = $("<span>").addClass("header-name").append(document.createTextNode(`@${data[1]}`));
+      $("#nav-bar").append(composeLogout, $uname);
+
+      $(".container .login-form").remove();
+      $(".container .regis-form").remove();
+      $(".container").prepend(composeForm);
+    }
+  });
+};
+
 const handleLike = function (e) {
   $(e.target).toggleClass("liked");
   const tweetID = $(e.target).data().id;
@@ -117,8 +218,25 @@ const handleLike = function (e) {
 
 $(document).ready(function () {
   loadTweets();
+
+  // On initial load or refresh of the page, deliver content according to cookies
+  $.ajax("/users/")
+  .then(function (data) {
+    if (data.uid) {
+      const $uname = $("<span>").addClass("header-name").append(document.createTextNode(`@${data.uid}`));
+      $("#nav-bar").append(composeLogout, $uname);
+      $(".container").prepend(composeForm);
+    } else {
+      $("#nav-bar").append(loginRegister);
+      $(".container").prepend(loginRegisForm);
+    }
+  });
+
+  // Handlers for form submission
   $(".new-tweet .error-message").hide();
-  $(".new-tweet form").submit(handleSubmit);
+  $(".container").on("submit", ".new-tweet form", handleSubmit);
+  $(".container").on("submit", ".login-form form", handleLogin);
+  $(".container").on("submit", ".regis-form form", handleRegister);
 
   $("#tweets-container").on("click", ".fa-heart", handleLike);
 
@@ -133,15 +251,43 @@ $(document).ready(function () {
     $(".new-tweet form textarea").val("");
   });
 
-  // Second handler for the log-in form
+  // Handler for the log-in
   $("#nav-bar").on("click", ".login", function () {
     $(".container .login-form").toggleClass("collapsed");
     $(".login-form .error-message").hide();
+    $(".container .regis-form").addClass("collapsed");
+    $(".regis-form .error-message").hide();
 
     // Clear the form
-    $(".login-form .username").val("");
     $(".login-form form .userid").val("");
     $(".login-form form .password").val("");
+  });
+
+  // Handler for the register
+  $("#nav-bar").on("click", ".register", function () {
+    $(".container .regis-form").toggleClass("collapsed");
+    $(".regis-form .error-message").hide();
+    $(".container .login-form").addClass("collapsed");
+    $(".login-form .error-message").hide();
+
+    // Clear the form
+    $(".regis-form .username").val("");
+    $(".regis-form form .userid").val("");
+    $(".regis-form form .password").val("");
+  });
+
+  // Handler for the logout
+  $("#nav-bar").on("click", ".logout", function () {
+    $.ajax("/users/logout", {method: "POST"})
+    .then(function (data) {
+      $("#nav-bar .compose").remove();
+      $("#nav-bar .logout").remove();
+      $("#nav-bar .header-name").remove();
+      $("#nav-bar").append(loginRegister);
+
+      $(".container .new-tweet").remove();
+      $(".container").prepend(loginRegisForm);
+    });
   });
 
 });

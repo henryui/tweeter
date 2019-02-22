@@ -36,7 +36,6 @@
   }
 
   .header {
-    float: left;
     font-size: 2rem;
     margin-left: 0.4em;
     line-height: 2.5em;
@@ -51,17 +50,28 @@
     }
   }
 
-  .compose:hover {
-    @extend %button-hover;
-  }
-
   .login {
     @extend %button-prop;
     margin-left: auto;
+  }
+
+  .logout {
+    @extend %button-prop;
+  }
+
+  .header-name {
+    font-size: 1.5rem;
+    margin-left: 0.4em;
+    line-height: 3em;
+    margin-right: 2.5em;
+  }
+
+  .register {
+    @extend %button-prop;
     margin-right: 4em;
   }
 
-  .login:hover {
+  .compose:hover, .login:hover, .logout:hover, .register:hover {
     @extend %button-hover;
   }
 }

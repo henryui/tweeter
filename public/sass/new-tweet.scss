@@ -6,7 +6,7 @@
   transition: max-height, 0.1s ease-out;
 }
 
-section.new-tweet, section.login-form {
+section.new-tweet, section.login-form, section.regis-form {
   margin: 2em;
   margin-bottom: 0.7em;
   margin-top: 0.6em;
@@ -52,7 +52,7 @@ section.new-tweet, section.login-form {
     }
   }
 
-  form.log-form {
+  form.log-form, form.reg-form {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -72,7 +72,7 @@ section.new-tweet, section.login-form {
     }
 
     input[type="submit"] {
-      width: 30%;
+      width: 40%;
     }
   }
 
@@ -82,7 +82,7 @@ section.new-tweet, section.login-form {
   }
 }
 
-section.new-tweet.collapsed, section.login-form.collapsed {
+section.new-tweet.collapsed, section.login-form.collapsed, section.regis-form.collapsed {
   max-height: 0px;
   border: 0;
 
