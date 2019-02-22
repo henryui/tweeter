@@ -15,7 +15,7 @@ section.new-tweet, section.login-form, section.regis-form {
   border-radius: 5px;
   /*padding: 0.7em;*/
   height: auto;
-  max-height: 300px;
+  max-height: 500px;
   overflow: hidden;
 }
 section.new-tweet h2, section.login-form h2, section.regis-form h2 {

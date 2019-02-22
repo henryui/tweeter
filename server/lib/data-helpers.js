@@ -20,19 +20,30 @@ module.exports = function makeDataHelpers (db) {
     },
 
     // Likes or unlikes a tweet and updates `db`
-    likeTweet (tweetID, liked, callback) {
+    likeTweet (tweetID, liker, callback) {
       db.collection("tweets").findOne({"_id": ObjectID(tweetID)}, function (err, result) {
         if (err) {
           throw err;
         }
-        const newValue = (liked === "true") ? result.like + 1 : result.like - 1;
-
-        db.collection("tweets").updateOne({"_id": ObjectID(tweetID)}, {$set: {"like": newValue}}, function (err, res) {
-          if (err) {
-            throw err;
+        if (result.user.handle.slice(1) === liker) {
+          callback(null, ["false", "false", 0]);
+        } else {
+          const newLike = result.like;
+          let didLike = "false";
+          if (liker in newLike) {
+            delete newLike[liker];
+          } else {
+            newLike[liker] = 1;
+            didLike = "true";
           }
-          callback(null, newValue);
-        });
+
+          db.collection("tweets").updateOne({"_id": ObjectID(tweetID)}, {$set: {"like": newLike}}, function (err, res) {
+            if (err) {
+              throw err;
+            }
+            callback(null, ["true", didLike, Object.keys(newLike).length]);
+          });
+        }
       });
     },
 

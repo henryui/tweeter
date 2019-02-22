@@ -22,8 +22,9 @@ app.use(cookieSession({
   keys: [process.env.COOKIE_KEY1, process.env.COOKIE_KEY2] // Change the keys value into some strings for testing
 }));
 
-// **Use 'seedDB()' below for reset/initialization of the data
-// If not needed, comment the 'seedDB()' below**
+// *#* Use 'seedDB()' below for reset/initialization of the data
+// If not needed, comment the 'seedDB()' below *#*
+
 // seedDB();
 
 

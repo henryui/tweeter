@@ -95,6 +95,8 @@ const createTweetElement = function (data) {
 
   // Note below that 'data._id' which is MongoDB ObjectId is used to identify each tweets,
   // and like count is only displayed if it is one or more
+  const likeNum = Object.keys(data.like).length;
+
   const $tweet = $("<article>").addClass("tweet").append(`
     <header>
       <img src="${data.user.avatars.regular}">
@@ -107,8 +109,8 @@ const createTweetElement = function (data) {
       <span class="utils">
         <i class="fas fa-flag"></i>
         <i class="fas fa-retweet"></i>
-        <i class="fas fa-heart" data-id=${data._id}></i>
-        <span class="like-count">${(data.like ? data.like.toString() : "")}</span>
+        <i class="fas fa-heart ${($("#nav-bar .header-name").text().slice(1) in data.like) ? "liked": ""}" data-id=${data._id}></i>
+        <span class="like-count">${(likeNum ? likeNum.toString() : "")}</span>
       </span>
     </footer>
   `);
@@ -201,24 +203,20 @@ const handleRegister = function (e) {
 };
 
 const handleLike = function (e) {
-  $(e.target).toggleClass("liked");
   const tweetID = $(e.target).data().id;
 
-  let liked = false;
-  if ($(e.target).hasClass("liked")) {
-    liked = !liked;
-  }
-
-  $.ajax(`/tweets/${tweetID}`, {method: "PUT", data: {liked}})
+  $.ajax(`/tweets/${tweetID}`, {method: "PUT"})
   .then(function (data) {
-    const count = (data) ? data.toString() : "";
-    $(e.target).siblings(".like-count").text(count);
+    if (data[0] === "true") {
+      const count = (data[2]) ? data[2].toString() : "";
+      $(e.target).siblings(".like-count").text(count);
+
+      $(e.target).toggleClass("liked");
+    }
   });
 };
 
 $(document).ready(function () {
-  loadTweets();
-
   // On initial load or refresh of the page, deliver content according to cookies
   $.ajax("/users/")
   .then(function (data) {
@@ -230,6 +228,7 @@ $(document).ready(function () {
       $("#nav-bar").append(loginRegister);
       $(".container").prepend(loginRegisForm);
     }
+    loadTweets();
   });
 
   // Handlers for form submission
@@ -287,6 +286,8 @@ $(document).ready(function () {
 
       $(".container .new-tweet").remove();
       $(".container").prepend(loginRegisForm);
+
+      $("i").removeClass("liked");
     });
   });
 
